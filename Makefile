@@ -9,6 +9,8 @@ venv:
 	venv/bin/pip install -U -r requirements.txt;\
 	)
 
+clean:
+	rm -fr venv
 
 all:install-deps venv 
 
