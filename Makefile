@@ -1,3 +1,8 @@
+install:
+	(\
+	chmod a+x run.py;\
+	)
+
 install-deps:
 	(\
 	yum install -y python-virtualenv;\
@@ -12,6 +17,6 @@ venv:
 clean:
 	rm -fr venv
 
-all:install-deps venv 
+all:install-deps venv install
 
 .PHONY: venv
