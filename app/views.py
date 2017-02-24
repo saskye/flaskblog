@@ -44,7 +44,7 @@ def login():
 def load_user(id):
     return User.query.get(int(id))
 
-@oid.after_login+
+@oid.after_login
 def after_login(resp):
     if resp.email is None or resp.email == "":
         flash('Invalid login. Please try adgain.')
