@@ -44,7 +44,7 @@ def login():
 def load_user(id):
     return User.query.get(int(id))
 
-@oid.after_login
+@oid.after_login+
 def after_login(resp):
     if resp.email is None or resp.email == "":
         flash('Invalid login. Please try adgain.')
@@ -72,3 +72,19 @@ def before_request():
 def logout():
     logout_user()
     return redirect(url_for('index'))
+
+
+@app.route('/user/<nickname>')
+@login_required
+def user(nickname):
+    user = User.query.filter_by(nickname = nickname).first()
+    if user == None:
+        flash('User ' + nickname + ' not found.')
+        return redirect(url_for('index'))
+    posts = [
+        {'author':user, 'body':'Test post #!'},
+        {'author':user, 'body':'Test psot #2'}
+    ]
+    return render_template('user.html',
+        user = user,
+        posts = posts)
